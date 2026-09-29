@@ -1,14 +1,15 @@
 const express = require('express'); // Import Express 
 const app = express();              // Create an Express app 
-const PORT = 3000;                  // Set the server port 
+const PORT = process.env.PORT || 3000;
+                 // Set the server port 
 const mysql = require('mysql2'); 
 // Create connection 
-const db = mysql.createConnection({ 
-host: 'localhost', 
-user: 'root', 
-password: 'A1b2C3d4', // replace with your MySQL password 
-database: 'my_database' 
-}); 
+const db = mysql.createConnection({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || 'A1b2C3d4',
+  database: process.env.DB_NAME || 'my_database'
+});
 // Connect to database 
 
 db.connect((err) => { 
